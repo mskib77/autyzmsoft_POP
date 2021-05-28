@@ -1,6 +1,5 @@
 package pl.autyzmsoft;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,15 +38,15 @@ public class LiczykropkaJsPage {
      * If any problems, returns -1
      */
     public int getNumber() {
-        int value = -1;
+        int value;
         try {
             value = Integer.parseInt(liczbaLK.getText());
-            if (value > 6) value = -1;
+            if (value > 6) return -1;
+            return value;
         } catch (Exception e) {
             Reporter.log(e.getMessage());
-            value = -1;
+            return -1;
         }
-        return value;
     }
 
     /***
@@ -63,7 +62,19 @@ public class LiczykropkaJsPage {
         return null;
     }
 
+    /***
+     * Trying to return the green button after it becomes visible.
+     * After a number of tries, returning it "as it is".
+     * (initially green button is invisible, but it IS present always)
+     */
     public WebElement getGreenButton() {
+        final int MAX_PROBES = 10; //to prevent infinite loop
+        int probe = 0;
+        while (!greenButtonLK.isDisplayed()) {
+            TestUtils.mySleep(200);
+            probe++;
+            if (probe >= MAX_PROBES) break;
+        }
         return greenButtonLK;
     }
 }

@@ -8,12 +8,25 @@ import org.testng.annotations.*;
 import pl.autyzmsoft.TestUtils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class HomePageTest extends BaseTest {
 
     //Each page has its title in the same place (Wordpress):
     final static String PAGE_TITLES_LOCATION = "//*[@id='content']/div[1]/h1";
+
+    /***
+     * To enforce multiple runs of some tests.
+     */
+    @DataProvider(name = "multiplayer")
+    public Object[][] getData() {
+        return new Object[][] {
+                {"przebieg", "1"},
+                {"przebieg", "2"},
+                {"przebieg", "3"},
+        };
+    }
 
     @Test(priority = 0)
     public void testDownloadPageAppears() {
@@ -35,7 +48,7 @@ public class HomePageTest extends BaseTest {
     }
 
     /**
-     * Checking whether all links on the Home Page are active.
+    * Checking whether all links on the Home Page are active.
     */
     @Test(priority = 2)
     public void testAllLinksAreActive() {
@@ -97,8 +110,9 @@ public class HomePageTest extends BaseTest {
      * 1. All buttons with numbers except the proper one(s) are disabled AND
      * 2. Big green button with @ sign appears
      */
-    @Test(priority = 4)
-    public void testClickingCorrectButtonInLiczykropkaJs() {
+    @Test(priority = 4, dataProvider = "multiplayer")
+    public void testClickingCorrectButtonInLiczykropkaJs(String[] parameters) {
+        System.out.println(parameters[0]+" "+parameters[1]);
         liczykropkaJsPage = homePage.goToLiczykropkaJs();
         new WebDriverWait(driver, TestUtils.WAIT_TIME).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("klawisz-klasa")));
         //Clicking proper button:
@@ -135,7 +149,7 @@ public class HomePageTest extends BaseTest {
         //Testing condition No 2:
         WebElement greenBtn = liczykropkaJsPage.getGreenButton();
         String style = greenBtn.getAttribute("style");
-        boolean test_2_ok = style.contains("visible");
+        boolean test_2_ok = greenBtn.isDisplayed();
 
         //Determining the reason(s) of negative test (if any):
         List<String> reasons = new ArrayList<>();
@@ -153,8 +167,8 @@ public class HomePageTest extends BaseTest {
     /***
      * Test whether javascript application profMarcin opens
      * Passed if:
-     *1. 4 buttons appear AND
-     *2. a picture appear
+     * 1. 4 buttons appear AND
+     * 2. a picture appear
      */
     @Test(priority = 5)
     public void testProfMarcinJsOpens(){
@@ -196,11 +210,15 @@ public class HomePageTest extends BaseTest {
      * 2. There appear a text element under the picture. The element contains proper word AND
      * 3. Big green button with right arrow appears
      */
-    @Test(priority = 6)
-    public void testClickingCorrectButtonInProfmarcinJs() {
+    @Test(priority = 6, dataProvider = "multiplayer")
+    public void testClickingCorrectButtonInProfmarcinJs(String[] parameters) {
+        System.out.println(parameters[0]+" "+parameters[1]);
         profMarcinJsPage = homePage.goToProfMarcinJs();
         //Getting the picture name (== the correct word on the buttons)
         String word = profMarcinJsPage.getWordDescribingThePicture();
+
+        TestUtils.mySleep(2000); //unnecessary, but for better visual effect ;)
+
         //Clicking on the button containing 'word':
         List<WebElement> btnsList = profMarcinJsPage.getButtonsList();
         for (WebElement btn : btnsList) {
@@ -209,6 +227,9 @@ public class HomePageTest extends BaseTest {
                 break;
             }
         }
+
+        TestUtils.mySleep(2000); //unnecessary, but for better visual effect ;)
+
         //Testing condition No 1:
         boolean test_1_ok = true;
         for (WebElement btn : btnsList) {

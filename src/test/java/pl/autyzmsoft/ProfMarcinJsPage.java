@@ -36,7 +36,7 @@ public class ProfMarcinJsPage {
     }
 
     /***
-     * Probing the picture until it becomes visible (==no longer of background color)<br>
+     * Probing the picture until it becomes visible (==no longer of Background color)<br>
      * May take some time;<br>When timeout - returns false
      */
     public boolean isPictureVisible() {
