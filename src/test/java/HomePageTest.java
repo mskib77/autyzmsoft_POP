@@ -1,44 +1,19 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.*;
-import pl.autyzmsoft.HomePage;
-import pl.autyzmsoft.LiczykropkaJsPage;
-import pl.autyzmsoft.ProfMarcinJsPage;
 import pl.autyzmsoft.TestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class HomePageTest {
-
-    public WebDriver driver;
-
-    private HomePage homePage;
-    private LiczykropkaJsPage liczykropkaJsPage;
-    private ProfMarcinJsPage profMarcinJsPage;
+public class HomePageTest extends BaseTest {
 
     //Each page has its title in the same place (Wordpress):
-    final String PAGE_TITLES_LOCATION = "//*[@id='content']/div[1]/h1";
-
-    @BeforeMethod
-    public void loadHomePage() {
-        System.setProperty("webdriver.firefox.driver", "src/test/java/data/gecodriver");
-        driver = new FirefoxDriver();
-        //System.setProperty("webdriver.chrome.driver", "src/test/java/data/chromedriver");
-        //driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(TestUtils.WAIT_TIME, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get(TestUtils.BASE_URL);
-        homePage = new HomePage(driver);
-        homePage.dismissCookies();
-    }
+    final static String PAGE_TITLES_LOCATION = "//*[@id='content']/div[1]/h1";
 
     @Test(priority = 0)
     public void testDownloadPageAppears() {
@@ -276,13 +251,6 @@ public class HomePageTest {
 
         Assert.assertTrue(test_ok, "Test: test_clicking_correct_button_in_profmarcin_js(): Errors detected:\\"
                 + reasons.toString() + " See screenshot.");
-    }
-
-    @AfterMethod
-    public void tearDown() {
-//        TestUtils.mySleep(3000);
-//        TestUtils.mySleep(1000);
-        driver.quit();
     }
 
     private class NoProperButtonException extends RuntimeException {
