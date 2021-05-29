@@ -8,25 +8,12 @@ import org.testng.annotations.*;
 import pl.autyzmsoft.TestUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class HomePageTest extends BaseTest {
 
     //Each page has its title in the same place (Wordpress):
     final static String PAGE_TITLES_LOCATION = "//*[@id='content']/div[1]/h1";
-
-    /***
-     * To enforce multiple runs of some tests.
-     */
-    @DataProvider(name = "multiplayer")
-    public Object[][] getData() {
-        return new Object[][] {
-                {"przebieg", "1"},
-                {"przebieg", "2"},
-                {"przebieg", "3"},
-        };
-    }
 
     @Test(priority = 0)
     public void testDownloadPageAppears() {
@@ -110,7 +97,7 @@ public class HomePageTest extends BaseTest {
      * 1. All buttons with numbers except the proper one(s) are disabled AND
      * 2. Big green button with @ sign appears
      */
-    @Test(priority = 4, dataProvider = "multiplayer")
+    @Test(priority = 4, dataProviderClass = TestsData.class, dataProvider = "multiplayer")
     public void testClickingCorrectButtonInLiczykropkaJs(String[] parameters) {
         System.out.println(parameters[0]+" "+parameters[1]);
         liczykropkaJsPage = homePage.goToLiczykropkaJs();
@@ -210,7 +197,7 @@ public class HomePageTest extends BaseTest {
      * 2. There appear a text element under the picture. The element contains proper word AND
      * 3. Big green button with right arrow appears
      */
-    @Test(priority = 6, dataProvider = "multiplayer")
+    @Test(priority = 6, dataProviderClass = TestsData.class, dataProvider = "multiplayer")
     public void testClickingCorrectButtonInProfmarcinJs(String[] parameters) {
         System.out.println(parameters[0]+" "+parameters[1]);
         profMarcinJsPage = homePage.goToProfMarcinJs();

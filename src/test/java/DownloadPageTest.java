@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pl.autyzmsoft.TestUtils;
 
@@ -21,30 +20,11 @@ public class DownloadPageTest extends BaseTest {
     }
 
     /***
-     * To enforce multiple runs of some tests.
-     */
-    @DataProvider(name = "GoodEmailsGenerator")
-    public Object[][] getDataGood() {
-        return new Object[][]{
-                {"1", "mskib77@gmail.com"},
-                {"2", "jan.kowalski@costam.com"},
-        };
-    }
-
-    @DataProvider(name = "BadEmailsGenerator")
-    public Object[][] getDataBad() {
-        return new Object[][]{
-                {"1", "mskib77#gmail.com"},
-                {"2", "aaaa.com"},
-        };
-    }
-
-    /***
      * Passed if:
      * 1. Text "WYSLANO LINKI NA ADRES" appears AND
      * 2. Addressee's email appears as text on the screen. This address is the same as the address given in the form.
      */
-    @Test(priority = 0, dataProvider = "GoodEmailsGenerator")
+    @Test(priority = 0, dataProviderClass = TestsData.class, dataProvider = "GoodEmailsGenerator")
     public void testGettingDownloadLinksWithCorrectEmail(String[] emails) {
         final String INFO_TEXT_OK = "WYSLANO LINKI NA ADRES"; //info text about email that has been sent correctly
         String emailToSend = emails[1];
