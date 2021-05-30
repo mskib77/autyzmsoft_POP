@@ -15,17 +15,16 @@ public class HomePageTest extends BaseTest {
     //Each page has its title in the same place (Wordpress):
     final static String PAGE_TITLES_LOCATION = "//*[@id='content']/div[1]/h1";
 
-    @Test(priority = 0)
+    @Test
     public void testDownloadPageAppears() {
         homePage.gotoDownloadPage();
-        /*  new WebDriverWait(driver,5).until(ExpectedConditions....v..isibilityOf(....));// albo .presenceOfElementLocated()....  */
         WebElement pageTitle = driver.findElement(By.xpath(PAGE_TITLES_LOCATION));
         String pageTitleText = pageTitle.getText();
         boolean testOK = pageTitleText.equals("DO POBRANIA");
         Assert.assertTrue(testOK, "Download Page did not appear or wrong Download Page Title!");
     }
 
-    @Test(priority = 1)
+    @Test
     public void testFullVersionsPageAppears() {
         homePage.gotoFullVersionsPage();
         WebElement pageTitle = driver.findElement(By.xpath(PAGE_TITLES_LOCATION));
@@ -37,7 +36,7 @@ public class HomePageTest extends BaseTest {
     /**
     * Checking whether all links on the Home Page are active.
     */
-    @Test(priority = 2)
+    @Test
     public void testAllLinksAreActive() {
         List<String> clickableLinks = homePage.getClickableLinks();
         boolean testOk = true;
@@ -58,7 +57,7 @@ public class HomePageTest extends BaseTest {
      * 1. 5 buttons appear AND
      * 2. a big number appears
      */
-    @Test(priority = 3)
+    @Test
     public void testLiczykropkaJsOpens(){
         final int NUM_BUTTONS = 5;  //how many buttons should appear
 
@@ -97,7 +96,7 @@ public class HomePageTest extends BaseTest {
      * 1. All buttons with numbers except the proper one(s) are disabled AND
      * 2. Big green button with @ sign appears
      */
-    @Test(priority = 4, dataProviderClass = TestsData.class, dataProvider = "multiplayer")
+    @Test(dependsOnMethods = {"testLiczykropkaJsOpens"},dataProviderClass = TestsData.class, dataProvider = "multiplayer")
     public void testClickingCorrectButtonInLiczykropkaJs(String[] parameters) {
         System.out.println(parameters[0]+" "+parameters[1]);
         liczykropkaJsPage = homePage.goToLiczykropkaJs();
@@ -157,7 +156,7 @@ public class HomePageTest extends BaseTest {
      * 1. 4 buttons appear AND
      * 2. a picture appear
      */
-    @Test(priority = 5)
+    @Test
     public void testProfMarcinJsOpens(){
         final int NUM_BUTTONS = 4;  //how many buttons should appear
 
@@ -197,7 +196,7 @@ public class HomePageTest extends BaseTest {
      * 2. There appear a text element under the picture. The element contains proper word AND
      * 3. Big green button with right arrow appears
      */
-    @Test(priority = 6, dataProviderClass = TestsData.class, dataProvider = "multiplayer")
+    @Test(dependsOnMethods = {"testProfMarcinJsOpens"}, dataProviderClass = TestsData.class, dataProvider = "multiplayer")
     public void testClickingCorrectButtonInProfmarcinJs(String[] parameters) {
         System.out.println(parameters[0]+" "+parameters[1]);
         profMarcinJsPage = homePage.goToProfMarcinJs();
