@@ -19,16 +19,17 @@ public class BaseTest {
     protected ProfMarcinJsPage profMarcinJsPage;
     protected DownloadPage downloadPage;
     protected FullVersionsPage fullVersionsPage;
+    protected OrderDetailsPage orderDetailsPage;
 
     /***
      * Loading Home Page before each test
      */
     @BeforeMethod
     public void bringUpHomePage() {
-        System.setProperty("webdriver.firefox.driver", "src/test/java/data/gecodriver");
-        driver = new FirefoxDriver();
-//        System.setProperty("webdriver.chrome.driver", "src/test/java/data/chromedriver");
-//        driver = new ChromeDriver();
+//        System.setProperty("webdriver.firefox.driver", "src/test/java/data/gecodriver");
+//        driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", "src/test/java/data/chromedriver");
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(TestUtils.WAIT_TIME, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(TestUtils.BASE_URL);
