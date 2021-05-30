@@ -1,6 +1,4 @@
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,8 +7,6 @@ import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.autyzmsoft.TestUtils;
-
-import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +18,6 @@ public class FullVersionsPageTest extends BaseTest {
     public void bringUpFullVersionsPage() {
         fullVersionsPage = homePage.gotoFullVersionsPage();
     }
-
 
     /***
      * Auxiliary; returns button 1 or 2 as specified by the 'number' parameter
@@ -66,29 +61,22 @@ public class FullVersionsPageTest extends BaseTest {
      * Passed if Order Details page appears.
      * ddt is used as there are 2 buttons that clicking on them should have same effect
      */
-//    @Test(dataProviderClass = TestsData.class, dataProvider = "multiplayer")
-    @Test
-    public void testClickOrderButtonsAfterChoosingItems() /*(String[] run)*/ {
+    @Test(dataProviderClass = TestsData.class, dataProvider = "multiplayer")
+    public void testClickOrderButtonsAfterChoosingItems(String[] run) /*(String[] run)*/ {
         List<WebElement> cbList = fullVersionsPage.getAllCheckboxesList();
         //clicking on randomly chosen checkbox:
         int maxVal = cbList.size();
-        int rnd = new Random().nextInt(maxVal);  //randint(0, maxVal);
-        rnd=0;
-        System.out.println(maxVal);
-        System.out.println(rnd);
+        int rnd = new Random().nextInt(maxVal);
         WebElement cb = cbList.get(rnd);
-        System.out.println("doszlem.....");
-//        new Actions(driver).moveToElement(cb).perform(); //move_to_element(cb).perform()
-
-//        Actions ac = new Actions(driver);
-//        System.out.println("doszlem1..");
-//        ac.moveToElement(fullVersionsPage.getOrderButton1()).perform(); //move_to_element(cb).perform()
-//        System.out.println("doszlem2.....");
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0, 150)");  //sometimes move_to_element is not enough to fully show the element
         cb.click();
-        TestUtils.mySleep(3000);
+        //Moving to OrderDetailsPage:
+        WebElement orderBtn = this.determineButtonToClick(run[1]);
+        orderBtn.click();
+        //Verifying page title:
+        WebElement pageTitle = driver.findElement(By.xpath(TestUtils.PAGE_TITLES_LOCATION));
+        String pageTitleText = pageTitle.getText();
+        boolean testOK = pageTitleText.equals("SZCZEGÓŁY ZAMÓWIENIAx");
+        Assert.assertTrue(testOK, "Order Details Page did not appear or wrong the page title!");
     }
 
 

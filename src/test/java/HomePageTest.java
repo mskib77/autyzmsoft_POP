@@ -12,13 +12,10 @@ import java.util.List;
 
 public class HomePageTest extends BaseTest {
 
-    //Each page has its title in the same place (Wordpress):
-    final static String PAGE_TITLES_LOCATION = "//*[@id='content']/div[1]/h1";
-
     @Test
     public void testDownloadPageAppears() {
         homePage.gotoDownloadPage();
-        WebElement pageTitle = driver.findElement(By.xpath(PAGE_TITLES_LOCATION));
+        WebElement pageTitle = driver.findElement(By.xpath(TestUtils.PAGE_TITLES_LOCATION));
         String pageTitleText = pageTitle.getText();
         boolean testOK = pageTitleText.equals("DO POBRANIA");
         Assert.assertTrue(testOK, "Download Page did not appear or wrong Download Page Title!");
@@ -27,7 +24,7 @@ public class HomePageTest extends BaseTest {
     @Test
     public void testFullVersionsPageAppears() {
         homePage.gotoFullVersionsPage();
-        WebElement pageTitle = driver.findElement(By.xpath(PAGE_TITLES_LOCATION));
+        WebElement pageTitle = driver.findElement(By.xpath(TestUtils.PAGE_TITLES_LOCATION));
         String pageTitleText = pageTitle.getText();
         boolean testOK = pageTitleText.equals("PEŁNE WERSJE");
         Assert.assertTrue(testOK, "Full Versions Page did not appear or wrong Download Page Title!");

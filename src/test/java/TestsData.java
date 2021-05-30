@@ -25,7 +25,6 @@ public class TestsData {
         return new Object[][] {
                 {"przebieg", "1"},
                 {"przebieg", "2"},
-                {"przebieg", "3"},
         };
     }
 

@@ -19,6 +19,9 @@ public class TestUtils {
     public static final int WAIT_TIME = 7; //system-wide implicit wait
     public static final String BASE_URL = "https://autyzmsoft.pl";
 
+    //Each page has its title in the same place (Wordpress):
+    public static final String PAGE_TITLES_LOCATION = "//*[@id='content']/div[1]/h1";
+
 
 
     /***
