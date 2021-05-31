@@ -3,6 +3,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.autyzmsoft.OrderDetailsPage;
+import pl.autyzmsoft.TestUtils;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +20,7 @@ public class OrderDetailsPageTest extends BaseTest {
     private void bringUpOrderDetailsPage() {
         fullVersionsPage = homePage.gotoFullVersionsPage();
         //choosing random number of a few checkboxes to check/click, then clicking them:
-        int toClick = new Random().nextInt(5)+1;
+        int toClick = new Random().nextInt(6)+2;
         clickRandomCheckboxes(toClick);
         //this will bring Order Details page on screen:
         fullVersionsPage.getOrderButton2().click();
