@@ -61,7 +61,7 @@ public class FullVersionsPageTest extends BaseTest {
      * ddt is used as there are 2 buttons that clicking on them should have same effect
      */
     @Test(dataProviderClass = TestsData.class, dataProvider = "multiplayer")
-    public void testClickOrderButtonsAfterChoosingItems(String[] run) /*(String[] run)*/ {
+    public void testClickOrderButtonsAfterChoosingItems(String[] run) {
         List<WebElement> cbList = fullVersionsPage.getAllCheckboxesList();
         //clicking on randomly chosen checkbox:
         int maxVal = cbList.size();
@@ -75,7 +75,7 @@ public class FullVersionsPageTest extends BaseTest {
         WebElement pageTitle = driver.findElement(By.xpath(TestUtils.PAGE_TITLES_LOCATION));
         String pageTitleText = pageTitle.getText();
         boolean testOK = pageTitleText.equals("SZCZEGÓŁY ZAMÓWIENIAx");
-        Assert.assertTrue(testOK, "Order Details Page did not appear or wrong the page title!");
+        Assert.assertTrue(testOK, "Order Details Page did not appear or wrong page title!");
     }
 
 

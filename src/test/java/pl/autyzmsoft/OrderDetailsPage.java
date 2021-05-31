@@ -30,16 +30,15 @@ public class OrderDetailsPage {
     public int getTotal() {
         String totalStr = total.getText();
         String totalSubstr = totalStr.substring(0,totalStr.indexOf(","));
-        System.out.println(totalSubstr);
         return Integer.parseInt(totalSubstr);
     }
 
-    public void clickBuyButton() {
+    public DotPayPage clickBuyButton() {
         buyButton.click();
+        return new DotPayPage(driver);
     }
 
     public void fillEmails(String emailStr) {
-        System.out.println("w fillEmails:"+emailStr);
         this.email.sendKeys(emailStr);
         this.emailRepeated.sendKeys(emailStr);
     }
