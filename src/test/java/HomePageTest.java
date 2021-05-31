@@ -12,6 +12,7 @@ import java.util.List;
 
 public class HomePageTest extends BaseTest {
 
+    //HP_01
     @Test
     public void testDownloadPageAppears() {
         homePage.gotoDownloadPage();
@@ -21,6 +22,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(testOK, "Download Page did not appear or wrong Download Page Title!");
     }
 
+    //HP_02
     @Test
     public void testFullVersionsPageAppears() {
         homePage.gotoFullVersionsPage();
@@ -30,6 +32,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(testOK, "Full Versions Page did not appear or wrong Download Page Title!");
     }
 
+    //HP_03
     /**
     * Checking whether all links on the Home Page are active.
     */
@@ -48,6 +51,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(testOk,"Inactive links on Home Page detected:"+inactiveLinks.toString());
     }
 
+    //HP_04
     /***
      * Test whether javascript application LiczyKropka opens
      * Passed if:
@@ -87,12 +91,15 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(test_ok, "Error in liczykropka.js "+reasons.toString());
     }
 
+    //HP_05
     /***
      * What happens after we clicked the correct button in Liczykropka js application?
      * Passed if:
      * 1. All buttons with numbers except the proper one(s) are disabled AND
      * 2. Big green button with @ sign appears
      */
+
+    //HP_05
     @Test(dependsOnMethods = {"testLiczykropkaJsOpens"},dataProviderClass = TestsData.class, dataProvider = "multiplayer")
     public void testClickingCorrectButtonInLiczykropkaJs(String[] parameters) {
         System.out.println(parameters[0]+" "+parameters[1]);
@@ -147,6 +154,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(test_ok, "Test: testClickingCorrectButtonInLiczykropkaJS(): Errors detected: "+reasons.toString()+" See screenshot.");
     }
 
+    //HP_06
     /***
      * Test whether javascript application profMarcin opens
      * Passed if:
@@ -185,6 +193,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertTrue(test_ok, "Error in profMarcin.js "+reasons.toString()+" See screenshot.");
     }
 
+    //HP_07
     /***
      * What happens after we clicked the correct button in profMarcin js application?
      * Passed if:

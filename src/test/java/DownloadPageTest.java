@@ -19,6 +19,7 @@ public class DownloadPageTest extends BaseTest {
         downloadPage = homePage.gotoDownloadPage();
     }
 
+    //DP_01
     /***
      * Passed if:
      * 1. Text "WYSLANO LINKI NA ADRES" appears AND
@@ -50,6 +51,7 @@ public class DownloadPageTest extends BaseTest {
         Assert.assertTrue(test_ok, reasons.toString());
     }
 
+    //DP_02
     /***
      * Passed if:
      * Text "We wprowadzonych danych wystąpiły błędy" appears

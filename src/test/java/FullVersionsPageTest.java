@@ -18,18 +18,7 @@ public class FullVersionsPageTest extends BaseTest {
         fullVersionsPage = homePage.gotoFullVersionsPage();
     }
 
-    /***
-     * Auxiliary; returns button 1 or 2 as specified by the 'number' parameter
-     */
-    private WebElement determineButtonToClick(String number) {
-       WebElement btn;
-       btn = fullVersionsPage.getOrderButton1();
-       if (number.equals("2")) {
-           btn = fullVersionsPage.getOrderButton2();
-       }
-        return btn;
-    }
-
+    //FV_01
     /***
      * Passed if Alert window appears AND it contains proper informative text.
      * ddt is used as there are 2 buttons that clicking on them should have same effect
@@ -56,6 +45,7 @@ public class FullVersionsPageTest extends BaseTest {
         Assert.assertTrue(test_ok, "Test failed. Alert window did not appear or improper text in the alert window!");
     }
 
+    //FV_02
     /***
      * Passed if Order Details page appears.
      * ddt is used as there are 2 buttons that clicking on them should have same effect
@@ -76,6 +66,18 @@ public class FullVersionsPageTest extends BaseTest {
         String pageTitleText = pageTitle.getText();
         boolean testOK = pageTitleText.equals("SZCZEGÓŁY ZAMÓWIENIA");
         Assert.assertTrue(testOK, "Order Details Page did not appear or wrong page title!");
+    }
+
+    /***
+     * Auxiliary; returns button 1 or 2 as specified by the 'number' parameter
+     */
+    private WebElement determineButtonToClick(String number) {
+        WebElement btn;
+        btn = fullVersionsPage.getOrderButton1();
+        if (number.equals("2")) {
+            btn = fullVersionsPage.getOrderButton2();
+        }
+        return btn;
     }
 
 

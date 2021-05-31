@@ -26,6 +26,7 @@ public class OrderDetailsPageTest extends BaseTest {
         orderDetailsPage = new OrderDetailsPage(driver);
     }
 
+    //OD_01
     /***
      * Test whether the total amount from Order Details page is correctly passed to DotPay system
      * Passed if both amounts are equal.
