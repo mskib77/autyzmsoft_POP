@@ -74,7 +74,7 @@ public class FullVersionsPageTest extends BaseTest {
         //Verifying page title:
         WebElement pageTitle = driver.findElement(By.xpath(TestUtils.PAGE_TITLES_LOCATION));
         String pageTitleText = pageTitle.getText();
-        boolean testOK = pageTitleText.equals("SZCZEGÓŁY ZAMÓWIENIAx");
+        boolean testOK = pageTitleText.equals("SZCZEGÓŁY ZAMÓWIENIA");
         Assert.assertTrue(testOK, "Order Details Page did not appear or wrong page title!");
     }
 

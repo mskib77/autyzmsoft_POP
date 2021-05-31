@@ -54,7 +54,7 @@ public class DownloadPageTest extends BaseTest {
      * Passed if:
      * Text "We wprowadzonych danych wystąpiły błędy" appears
      */
-    @Test(priority = 1, dataProvider = "BadEmailsGenerator")
+    @Test(priority = 1, dataProviderClass = TestsData.class,dataProvider = "BadEmailsGenerator")
     public void testGettingDownloadLinksWithIncorrect_email(String[] emails) {
         String infoTextErr = new String("We wprowadzonych danych wystąpiły błędy");
         downloadPage.fillEmail(emails[1]);

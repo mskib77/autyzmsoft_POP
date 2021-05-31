@@ -10,7 +10,7 @@ import java.util.Random;
 public class OrderDetailsPageTest extends BaseTest {
 
     /***
-     * Causes Order Details (Szczególy Zamówienia) page to appear onscreen before each test.
+     * Causes Order Details (Szczególy Zamówienia) page to appear on screen before each test.
      * In order to do so a "mock" order is made on Full Versions page. The order
      * is made by randomly choosing a few product checkboxes.
      */
@@ -29,9 +29,10 @@ public class OrderDetailsPageTest extends BaseTest {
     /***
      * Test whether the total amount from Order Details page is correctly passed to DotPay system
      * Passed if both amounts are equal.
+     * ddt is used to enforce running the test more than once.
      */
-    @Test
-    public void testIsAmountCorrectlyPassed() {
+    @Test(dataProviderClass = TestsData.class, dataProvider = "multiplayer")
+    public void testIsAmountCorrectlyPassed(String[] run) {
         final String CORRECT_EMAIL = "mskib77@gmail.com";
         int total = orderDetailsPage.getTotal();
         orderDetailsPage.fillEmails(CORRECT_EMAIL);

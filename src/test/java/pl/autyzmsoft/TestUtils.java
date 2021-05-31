@@ -22,10 +22,8 @@ public class TestUtils {
     //Each page has its title in the same place (Wordpress):
     public static final String PAGE_TITLES_LOCATION = "//*[@id='content']/div[1]/h1";
 
-
-
     /***
-     *
+     * Cheks whether given url points to an active address.
      * @param url given as String
      * @return true if @url points to an active address
      */
@@ -34,14 +32,13 @@ public class TestUtils {
         final int OK =  HttpURLConnection.HTTP_OK;  //200
 
         try {
-            URL urlObj = null;
-            urlObj = new URL(url);
+            URL urlObj = new URL(url);
             HttpURLConnection huc = null;
             huc = (HttpURLConnection) urlObj.openConnection();
             huc.setRequestMethod("HEAD");
             responseCode = huc.getResponseCode();
         } catch (Exception e) {
-            Reporter.log(e.getMessage());
+            Reporter.log(" Problem with url: "+e.getMessage());
         } finally {
             if (responseCode == OK) System.out.println(url + " - ok");
             else System.out.println(url + " - problem");
@@ -49,7 +46,6 @@ public class TestUtils {
 
         return (responseCode == OK);
     }
-
 
     public static void screenShot(WebDriver driver, String fileName) {
         Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(100)).takeScreenshot(driver);

@@ -1,10 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Testy" verbose="1">
-
+<suite name="Testy" preserve-order="true" verbose="1">
 
     <test name="Testy witryny autyzmsoft.pl" preserve-order="true" enabled="true">
         <classes>
             <class name="HomePageTest"></class>
+            <class name="DownloadPageTest"></class>
+            <class name="FullVersionsPageTest"></class>
+            <class name="OrderDetailsPageTest"></class>
         </classes>
     </test>
 
